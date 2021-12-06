@@ -16,7 +16,7 @@ namespace wpf_Generic_ListBox_Canvas
             Items = new ObservableCollection<BaseThing>
             {
                 new CircleVM {Top=000.0, Left=000.0, EllipseHeight=400, EllipseWidth=400, Thickness = 40, Color = Color.FromArgb(255, 255, 0, 0)},
-                new CircleVM {Top=040.0, Left=040.0, EllipseHeight=320, EllipseWidth=320, Thickness = 40, Color = Color.FromArgb(255, 0, 0, 255)},
+                new CircleVM {Top=140.0, Left=040.0, EllipseHeight=320, EllipseWidth=320, Thickness = 40, Color = Color.FromArgb(255, 0, 0, 255)},
                 new CircleVM {Top=080.0, Left=080.0, EllipseHeight=240, EllipseWidth=240, Thickness = 40, Color = Color.FromArgb(255, 0, 255, 0)}
             };
         }

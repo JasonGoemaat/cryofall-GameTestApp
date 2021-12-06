@@ -10,39 +10,46 @@
         <local:MainWindowViewModel/>
     </Window.DataContext>
     <Window.Resources>
-
+        <local:ColorToBrushConverter x:Key="ColorToBrushConverter" />
     </Window.Resources>
     <Grid>
-        <ItemsControl x:Name="ic" ItemsSource="{Binding Items}"
-                              >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+
+
+        <Button Width="400" Height="400" Grid.Column="1" Grid.Row="0">Hello</Button>
+
+        <ItemsControl x:Name="ic" ItemsSource="{Binding Items}"  Grid.Column="0" Grid.Row="1">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas  Width="400" Height="400" Background="Gray" Grid.Column="0" Grid.Row="1" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemContainerStyle>
+                <Style TargetType="ContentPresenter">
+                    <Setter Property="Canvas.Left" Value="{Binding Left}" />
+                    <Setter Property="Canvas.Top" Value="{Binding Top}" />
+                </Style>
+            </ItemsControl.ItemContainerStyle>
             <ItemsControl.Resources>
                 <DataTemplate DataType="{x:Type local:CircleVM}">
                     <Ellipse
-                                StrokeThickness="{Binding Thickness}"
-                                Width="{Binding EllipseWidth}"
-                                Height="{Binding EllipseHeight}"
-                                >
-                        <Ellipse.Stroke>
-                            <SolidColorBrush Color="{Binding Color}" />
-                        </Ellipse.Stroke>
-
+                            StrokeThickness="{Binding Thickness}"
+                            Width="{Binding EllipseWidth}"
+                            Height="{Binding EllipseHeight}"
+                            Stroke="{Binding Color, Converter={StaticResource ColorToBrushConverter}}">
                     </Ellipse>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type local:TextBoxVM}">
                     <TextBox Text="{Binding TbText}"/>
                 </DataTemplate>
             </ItemsControl.Resources>
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Canvas />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemContainerStyle>
-                <Style TargetType="ContentPresenter">
-                    <Setter Property="Canvas.Top" Value="{Binding Top}"/>
-                    <Setter Property="Canvas.Left" Value="{Binding Left}"/>
-                </Style>
-            </ItemsControl.ItemContainerStyle>
         </ItemsControl>
     </Grid>
 </Window>
