@@ -11,24 +11,33 @@
     </Window.DataContext>
     <Window.Resources>
         <local:ColorToBrushConverter x:Key="ColorToBrushConverter" />
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="120" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="400"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-
-
-        <Button Width="400" Height="400" Grid.Column="1" Grid.Row="0">Hello</Button>
-
-        <ItemsControl x:Name="ic" ItemsSource="{Binding Items}"  Grid.Column="0" Grid.Row="1">
+        <StackPanel Grid.Column="1" Grid.Row="0">
+            <Button>Reset</Button>
+            <Button>Add Point</Button>
+        </StackPanel>
+        <ItemsControl x:Name="icVisible" ItemsSource="{Binding VisibleAreas}"  Grid.Column="0" Grid.Row="1">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <Canvas  Width="400" Height="400" Background="Gray" Grid.Column="0" Grid.Row="1" />
+                    <Canvas  Width="400" Height="400" Background="Gray" Grid.Column="0" Grid.Row="1" >
+                        <Canvas.OpacityMask>
+                            <VisualBrush Visual="{Binding ElementName=canvas2}" />
+                        </Canvas.OpacityMask>
+                    </Canvas>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemContainerStyle>
@@ -51,5 +60,35 @@
                 </DataTemplate>
             </ItemsControl.Resources>
         </ItemsControl>
+
+        <ItemsControl x:Name="icHidden" ItemsSource="{Binding HiddenAreas}"  Grid.Column="0" Grid.Row="1">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas  Width="400" Height="400" Background="Transparent" Grid.Column="0" Grid.Row="1" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemContainerStyle>
+                <Style TargetType="ContentPresenter">
+                    <Setter Property="Canvas.Left" Value="{Binding Left}" />
+                    <Setter Property="Canvas.Top" Value="{Binding Top}" />
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+            <ItemsControl.Resources>
+                <DataTemplate DataType="{x:Type local:CircleVM}">
+                    <Ellipse
+                            StrokeThickness="{Binding Thickness}"
+                            Width="{Binding EllipseWidth}"
+                            Height="{Binding EllipseHeight}"
+                            Stroke="{Binding Color, Converter={StaticResource ColorToBrushConverter}}">
+                    </Ellipse>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type local:TextBoxVM}">
+                    <TextBox Text="{Binding TbText}"/>
+                </DataTemplate>
+            </ItemsControl.Resources>
+        </ItemsControl>
+
+        <Canvas x:Name="canvas2" Background="#FF000000" Width="400" Height="400" Grid.Column="0" Grid.Row="2">
+        </Canvas>
     </Grid>
 </Window>

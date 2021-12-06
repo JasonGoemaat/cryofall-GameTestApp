@@ -10,15 +10,53 @@ namespace wpf_Generic_ListBox_Canvas
 {
     public class MainWindowViewModel
     {
-        public ObservableCollection<BaseThing> Items { get; set; }
+        public ObservableCollection<BaseThing> VisibleAreas { get; set; }
+        public ObservableCollection<BaseThing> HiddenAreas { get; set; }
+        
         public MainWindowViewModel()
         {
-            Items = new ObservableCollection<BaseThing>
+            VisibleAreas = new ObservableCollection<BaseThing>
             {
-                new CircleVM {Top=000.0, Left=000.0, EllipseHeight=400, EllipseWidth=400, Thickness = 40, Color = Color.FromArgb(255, 255, 0, 0)},
-                new CircleVM {Top=140.0, Left=040.0, EllipseHeight=320, EllipseWidth=320, Thickness = 40, Color = Color.FromArgb(255, 0, 0, 255)},
-                new CircleVM {Top=080.0, Left=080.0, EllipseHeight=240, EllipseWidth=240, Thickness = 40, Color = Color.FromArgb(255, 0, 255, 0)}
+                //new CircleVM {Top=000.0, Left=000.0, EllipseHeight=400, EllipseWidth=400, Thickness = 40, Color = Color.FromArgb(100, 255, 0, 0)},
+                //new CircleVM {Top=140.0, Left=040.0, EllipseHeight=320, EllipseWidth=320, Thickness = 40, Color = Color.FromArgb(100, 0, 0, 255)},
+                
             };
+
+            // outer ping, thickness is 10, width and height are 100
+            VisibleAreas.Add(new CircleVM { Top = 100.0, Left = 100.0, EllipseHeight = 200, EllipseWidth = 200, Thickness = 20, Color = Color.FromArgb(100, 255, 0, 0) });
+            
+            // we have moved 20 units to the right, since ellipse is smaller, left is +40, and width and height are -40
+            // top is also +20 because ellips is smaller
+            // Top and Left are actually Location - (outer range)
+            // Width and Height are (outer rage * 2)
+            VisibleAreas.Add(new CircleVM { Top = 120.0, Left = 140.0, EllipseHeight = 160, EllipseWidth = 160, Thickness = 20, Color = Color.FromArgb(100, 0, 0, 255) });
+
+            HiddenAreas = new ObservableCollection<BaseThing>();
+            foreach (CircleVM circle in VisibleAreas)
+            {
+                //var outer = new CircleVM()
+                //{
+                //    Top = circle.Top - 40,
+                //    Left = circle.Left - 40,
+                //    EllipseHeight = circle.EllipseHeight + 80,
+                //    EllipseWidth = circle.EllipseWidth + 80,
+                //    Thickness = 80,
+                //    Color = Color.FromArgb(100, 0, 0, 0)
+                //};
+
+                //var inner = new CircleVM()
+                //{
+                //    Top = circle.Top + 20,
+                //    Left = circle.Left + 20,
+                //    EllipseHeight = circle.EllipseHeight- 40,
+                //    EllipseWidth = circle.EllipseWidth - 40,
+                //    Thickness = 20,
+                //    Color = Color.FromArgb(100, 0, 0, 0)
+                //};
+
+                //HiddenAreas.Add(outer);
+                //HiddenAreas.Add(inner);
+            }
         }
     }
 

@@ -23,6 +23,11 @@ namespace wpf_Generic_ListBox_Canvas
         public Sample()
         {
             InitializeComponent();
+
+            var vm = new MainWindowViewModel();
+            this.DataContext = vm;
+            //vm.VisibleAreas.Add(new CircleVM { Top = 050.0, Left = 050.0, EllipseHeight = 400, EllipseWidth = 400, Thickness = 40, Color = Color.FromArgb(100, 255, 255, 0) });
+            //vm.VisibleAreas.Add(new CircleVM { Top = 050.0, Left = 060.0, EllipseHeight = 400, EllipseWidth = 400, Thickness = 40, Color = Color.FromArgb(100, 255, 255, 0) });
         }
     }
 
