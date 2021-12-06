@@ -21,6 +21,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="400"/>
+            <RowDefinition Height="400"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -88,7 +89,15 @@
             </ItemsControl.Resources>
         </ItemsControl>
 
-        <Canvas x:Name="canvas2" Background="#FF000000" Width="400" Height="400" Grid.Column="0" Grid.Row="2">
+        <Canvas x:Name="canvas2" Background="#ff000000" Width="400" Height="400" Grid.Column="0" Grid.Row="2">
+            <Ellipse 
+                Canvas.Top="120"
+                Canvas.Left="140"
+                StrokeThickness="20"
+                Width="160"
+                Height="160"
+                Stroke="#00ffffff">
+            </Ellipse>
         </Canvas>
     </Grid>
 </Window>

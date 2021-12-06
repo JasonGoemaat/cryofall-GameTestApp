@@ -8,32 +8,81 @@
         Title="MainWindow" Height="450" Width="800"
         Background="DarkBlue">
     <Grid>
-        <Canvas Width="400" Height="400" Background="Black">
-        <!-- Inner static ellipse -->
-            <!--<Ellipse x:Name="EllipseInnerBackground"
-                     Stretch="Fill"
-                     RenderTransformOrigin="0.5,0.5"
-                     Stroke="Transparent"
-                     StrokeThickness="5"
-                     Margin="1"
-                     Canvas.Left="100"
-                     Canvas.Top="100"
-                     Canvas.Width="200"
-                     Canvas.Height="200"
-                     >
-                <Ellipse.Fill>
-                    <SolidColorBrush Color="#FFFF0000" />
-                </Ellipse.Fill>
-            </Ellipse>
-            <Ellipse Fill="Gainsboro" Canvas.Left="25" Canvas.Top="25" Width="200" Height="200" />-->
-            <!--<Path Stroke="Yellow" StrokeThickness="20"  Data="M 10,100 A 80,80 0 1 0 200,100" />-->
-            <Ellipse
-                Canvas.Left="0"
-                Canvas.Top="0"
-                Width="400"
-                Height="400"
-                Stroke="Blue"
-                StrokeThickness="100"></Ellipse>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200"></RowDefinition>
+            <RowDefinition Height="200"></RowDefinition>
+            <RowDefinition Height="200"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Canvas Width="200" Height="200" Background="Transparent" Grid.Row="0" Grid.Column="0" x:Name="c1">
+            <Ellipse Width="200" Height="200" Fill="#ff00ff00"></Ellipse>
+        </Canvas>
+        <Canvas Width="200" Height="200" Background="Transparent" Grid.Row="0" Grid.Column="1" x:Name="c2">
+            <Ellipse Canvas.Left="50" Canvas.Top="50" Width="100" Height="100" Fill="#FFFFFFFF"></Ellipse>
+        </Canvas>
+        <Canvas Width="200" Height="200" Background="Black" Grid.Row="1" Grid.Column="0" x:Name="c3">
+            <Canvas.OpacityMask>
+                <VisualBrush Visual="{Binding ElementName=c4}" />
+            </Canvas.OpacityMask>
+            <Ellipse Width="200" Height="200" Fill="#ff00ff00"></Ellipse>
+        </Canvas>
+        <Canvas Width="200" Height="200" Background="Transparent" Grid.Row="1" Grid.Column="1" x:Name="c4">
+            <Ellipse Canvas.Left="50" Canvas.Top="50" Width="100" Height="100" Fill="#ffffffff"></Ellipse>
+        </Canvas>
+
+        <Canvas Width="200" Height="200" Background="Transparent" Grid.Row="2" Grid.Column="0" x:Name="c5">
+            <Ellipse Width="200" Height="200" Fill="#FF00ff00"></Ellipse>
+            <Ellipse Width="100" Height="100" Fill="DarkBlue" Canvas.Left="50" Canvas.Top="50" ></Ellipse>
+        </Canvas>
+
+        <Canvas Width="200" Height="200" Background="Transparent" Grid.Row="2" Grid.Column="1" x:Name="c6">
+            <Path Stroke="Black" StrokeThickness="1" Fill="#CCCCFF">
+                <Path.Data>
+                    <GeometryGroup FillRule="EvenOdd">
+                        <EllipseGeometry RadiusX="40" RadiusY="40" Center="100,100" />
+                        <EllipseGeometry RadiusX="60" RadiusY="60" Center="100,100" />
+                        <EllipseGeometry RadiusX="80" RadiusY="80" Center="100,100" />
+                        <EllipseGeometry RadiusX="100" RadiusY="100" Center="100,100" />
+                    </GeometryGroup>
+                </Path.Data>
+            </Path>
+        </Canvas>
+
+
+        <Canvas Width="200" Height="200" Background="Transparent" Grid.Row="0" Grid.Column="2" x:Name="r0c2">
+            <Path Stroke="Black" StrokeThickness="1" Fill="#CCCCFF">
+                <Path.Data>
+
+                    <!-- Combines two geometries using the exclude combine mode. -->
+                    <CombinedGeometry GeometryCombineMode="Exclude">
+                        <CombinedGeometry.Geometry1>
+                            <CombinedGeometry GeometryCombineMode="Exclude">
+                                <CombinedGeometry.Geometry1>
+                                    <EllipseGeometry RadiusX="100" RadiusY="100" Center="100,100" />
+                                </CombinedGeometry.Geometry1>
+                                <CombinedGeometry.Geometry2>
+                                    <EllipseGeometry RadiusX="50" RadiusY="50" Center="125,75" />
+                                </CombinedGeometry.Geometry2>
+                            </CombinedGeometry>
+                        </CombinedGeometry.Geometry1>
+                        <CombinedGeometry.Geometry2>
+                            <CombinedGeometry GeometryCombineMode="Exclude">
+                                <CombinedGeometry.Geometry1>
+                                    <EllipseGeometry RadiusX="100" RadiusY="100" Center="110,100" />
+                                </CombinedGeometry.Geometry1>
+                                <CombinedGeometry.Geometry2>
+                                    <EllipseGeometry RadiusX="50" RadiusY="50" Center="125,75" />
+                                </CombinedGeometry.Geometry2>
+                            </CombinedGeometry>
+                        </CombinedGeometry.Geometry2>
+                    </CombinedGeometry>
+                </Path.Data>
+            </Path>
         </Canvas>
     </Grid>
 </Window>
